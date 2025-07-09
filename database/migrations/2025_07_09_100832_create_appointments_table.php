@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('doctor_name');
-            $table->dateTime('appointment_date');
-            $table->text('notes')->nullable();
-            $table->boolean('reminder_sent')->default(false);
-            $table->timestamps();
+            $table->string('patient_name');
+$table->string('patient_phone');
+$table->string('doctor_name');
+$table->string('appointment_type');
+$table->dateTime('date_time');
+$table->string('channel'); // SMS, WhatsApp, Other
+$table->text('notes')->nullable();
+$table->boolean('reminder_sent')->default(false);
+$table->timestamps();
         });
     }
 
