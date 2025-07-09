@@ -23,8 +23,15 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('appointments', AppointmentController::class)->only([
-    'index', 'create', 'store'
+Route::resource('appointments', AppointmentController::class)->except([
+    'show'
 ]);
 
 
+Route::post('/appointments/{appointment}/send-reminder', [AppointmentController::class, 'sendReminder'])
+    ->middleware(['auth'])
+    ->name('appointments.sendReminder');
+
+Route::get('/appointments/{appointment}/preview-reminder', [AppointmentController::class, 'previewReminder'])
+    ->middleware(['auth'])
+    ->name('appointments.previewReminder');
